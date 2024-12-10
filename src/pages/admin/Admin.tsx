@@ -14,6 +14,9 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 interface LinkProps {
   id: string;
   name: string;
@@ -62,8 +65,16 @@ const Admin = () => {
   function handleCadastrar(e: FormEvent) {
     e.preventDefault();
 
-    if(nameInput === '' || nameUrl === ''){
-      alert('Preencha todos os campos')
+    if (nameInput === '' || nameUrl === '') {
+      toast.error('Preencha todos os campos!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'light',
+      });
       return;
     }
 
@@ -77,10 +88,18 @@ const Admin = () => {
     .then(() => {
       setNameInput('');
       setNameUrl('');
-      console.log("CADASTRADO COM SUCESSO!");
+      toast.success('Link cadastrado com sucesso!', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      // console.log("CADASTRADO COM SUCESSO!");
     })
     .catch((error) => {
-      console.log(`ERRO AO CADASTRAR NO BANCO! ${error}`);
+      toast.error(`Erro ao cadastrar: ${error}`, {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      // console.log(`ERRO AO CADASTRAR NO BANCO! ${error}`);
     })
   }
 
@@ -167,6 +186,7 @@ const Admin = () => {
           </article>
         ))}
 
+        <ToastContainer />
     </div>
   )
 }

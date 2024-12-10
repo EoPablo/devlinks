@@ -6,6 +6,8 @@ import Login from './pages/login/Login';
 import Network from './pages/network/Network';
 import NotFound from './pages/notfound/NotFound';
 
+
+
 import Private from './routes/Private';
 
 const router = createBrowserRouter([
